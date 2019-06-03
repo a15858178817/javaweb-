@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Buy">
+
+ <select id="find_items" resultType="pojo.Items">
+   select * from items
+ </select>
+ 
+  <select id="find_itemsById" resultType="pojo.Items">
+   select * from items where id=#{value}
+ </select>
+ 
+ <update id="update_items" parameterType="pojo.Items">
+    update items set name=#{name},price=#{price},pic=#{pic},
+    detail=#{detail},createtime=#{createtime}
+    where id=#{id}
+  </update>
+  
+  <delete id="delete_items" >
+    delete from items where id=#{value}
+  </delete>
+  
+  <insert id="insert_items" parameterType="pojo.Items">
+    insert into items(name,price,pic,detail,createtime)
+               values(#{name},#{price},#{pic},#{detail},#{createtime})
+  </insert>
+  
+  <select id="mohu_select" resultType="pojo.Items" parameterType="java.lang.String">
+   select * from items where  name like '%${value}%' or detail like '%${value}%'
+  </select>
+</mapper>
